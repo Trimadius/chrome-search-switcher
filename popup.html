@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Search Engine Switcher</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      width: 200px;
+      width: 220px;
       padding: 10px;
     }
-    select {
+    select, input, button {
       width: 100%;
       margin: 5px 0;
+    }
+    #customEngineSection {
+      display: none;
+      margin-top: 10px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
     }
   </style>
 </head>
 <body>
+
   <h3>Выберите поисковик:</h3>
-  <select id="searchEngineSelect">
-    <option value="Google">Google</option>
-    <option value="Bing">Bing</option>
-    <option value="DuckDuckGo">DuckDuckGo</option>
-  </select>
-  <button id="saveButton">Сохранить</button>
+  <select id="searchEngineSelect"></select>
+
+  <input type="text" id="searchQuery" placeholder="Что искать?" />
+  <button id="searchButton">Искать</button>
+
+  <button id="toggleAddEngine">Добавить поисковик</button>
+
+  <div id="customEngineSection">
+    <input type="text" id="engineName" placeholder="Название" />
+    <input type="text" id="engineUrl" placeholder="URL с %s вместо запроса" />
+    <button id="addButton">Добавить</button>
+  </div>
 
   <script src="popup.js"></script>
 </body>
