@@ -4,9 +4,20 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.action.onClicked.addListener((tab) => {
-  // Открываем popup при клике на иконку
-  chrome.action.openPopup();
-});
+    chrome.storage.sync.get(['searchEngines', 'selectedSearchEngine'], (data) => {
+      const engineURL = data.searchEngines?.[data.selectedSearchEngine];
+  
+      if (engineURL) {
+        const query = prompt("Введите поисковый запрос:");
+        if (query) {
+          const url = engineURL.replace('%s', encodeURIComponent(query));
+          chrome.tabs.create({ url });
+        }
+      } else {
+        alert("Поисковик не выбран или не найден.");
+      }
+    });
+  });  
 
 // Функция для изменения поисковика
 function setSearchEngine(engine) {
